@@ -133,7 +133,11 @@ struct bufferevent* red_connect_relay_if(const char *ifname,
     }
 
     if (ifname) {
+#ifdef LINUX
         error = setsockopt(relay_fd, SOL_SOCKET, SO_BINDTODEVICE, ifname, strlen(ifname));
+#else /* !LINUX */
+	error = setsockopt(relay_fd, SOL_SOCKET, IP_RECVIF, ifname, strlen(ifname));
+#endif /* !LINUX */
         if (error) {
             log_errno(LOG_ERR, "bind");
             goto fail;

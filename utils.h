@@ -7,6 +7,10 @@
 
 struct sockaddr_in;
 
+#ifndef LINUX
+#define SOL_IP IPPROTO_IP
+#endif
+
 #define SIZEOF_ARRAY(arr)        (sizeof(arr) / sizeof(arr[0]))
 #define FOREACH(ptr, array)      for (ptr = array; ptr < array + SIZEOF_ARRAY(array); ptr++)
 #define FOREACH_REV(ptr, array)  for (ptr = array + SIZEOF_ARRAY(array) - 1; ptr >= array; ptr--)

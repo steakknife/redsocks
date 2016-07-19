@@ -8,8 +8,9 @@ OUT := redsocks2
 VERSION := 0.65
 
 LIBS := -levent
-CFLAGS +=-fPIC -O3
-override CFLAGS += -std=c99 -D_XOPEN_SOURCE=600 -D_BSD_SOURCE -D_DEFAULT_SOURCE -Wall
+CFLAGS +=-fPIC -O3 -I/usr/local/opt/openssl/include
+override CFLAGS += -std=gnu99  -Wall
+LDFLAGS += -L/usr/local/opt/openssl/lib
 #LDFLAGS += -fwhole-program
 ifdef USE_CRYPTO_POLARSSL
 override LIBS += -lpolarssl
